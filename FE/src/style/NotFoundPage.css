@@ -1,0 +1,105 @@
+/* الخلفية الرئيسية للصفحة */
+.error-page-container {
+    display: flex;
+    flex-direction: row; 
+    justify-content: center;
+    gap:60px;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    background: #ffffff; /* لون فاتح جدًا كخلفية أساسية */
+    font-family: "Tajawal", sans-serif;
+    text-align: center; 
+    overflow: hidden; 
+}
+
+/* --- قسم الأنيميشن (الروبوت) --- */
+.error-image-content {
+    position: relative; 
+    margin-bottom: 2rem;
+    display: flex; /* للتأكد من التوسيط */
+    justify-content: center;
+}
+
+/* ✅ 4. تنسيق حاوية الأنيميشن */
+.error-robot-animation {
+    width: 100%;
+    max-width:550px; /* تحكم في أقصى عرض للروبوت */
+    height: auto;
+}
+
+/* نص 404 الباهت في الخلفية */
+.background-404-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 15rem; 
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.04); 
+    z-index: -1;
+    user-select: none;
+}
+
+/* --- قسم النص (أسفل الروبوت) --- */
+.error-text-content {
+    position: relative; /* لضمان ظهوره فوق أي عناصر خلفية */
+    z-index: 1;
+}
+.error-message-animation{
+    
+}
+.error-text-content h1 {
+    font-size: 3.5rem; 
+    font-weight: 900;
+    color: #111B21;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.error-text-content p {
+    font-size: 1.2rem; 
+    color: #54656f;
+    margin-bottom: 2.5rem;
+    max-width: 450px; 
+}
+
+/* --- زر العودة (بنفس ستايل اللوجين) --- */
+.error-home-button {
+    padding: 14px 35px; 
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(90deg, #FF8C42, #FF6337); 
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.error-home-button:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 4px 15px rgba(255, 107, 55, 0.4);
+    color: white;
+    -webkit-transform: translateY(-6px);
+    -moz-transform: translateY(-6px);
+    -ms-transform: translateY(-6px);
+    -o-transform: translateY(-6px);
+}
+
+
+/* تعديلات للشاشات الصغيرة */
+@media (max-width: 768px) {
+    .error-robot-animation {
+        max-width: 400px;
+    }
+    .error-text-content h1 {
+        font-size: 2.5rem;
+    }
+    .background-404-text {
+        font-size: 10rem;
+    }
+}

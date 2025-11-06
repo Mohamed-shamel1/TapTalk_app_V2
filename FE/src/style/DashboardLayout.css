@@ -1,0 +1,264 @@
+/* ================================================
+   📱 DASHBOARD LAYOUT - FULLY RESPONSIVE
+   ================================================ */
+
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: 80px 400px 1fr;
+    grid-template-areas: "nav conversations content";
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: var(--bg-primary);
+    position: relative;
+}
+
+/* ===== GRID AREAS ===== */
+.nav-sidebar {
+    grid-area: nav;
+}
+
+.conversations-panel {
+    grid-area: conversations;
+}
+
+.chat-window,
+.settings-page,
+.ai-chat-page {
+    grid-area: content;
+}
+
+/* ===== LOADING ===== */
+.loading-full-page {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-primary);
+}
+
+/* ================================================
+   🖥️ DESKTOP (1024px+) - Default
+   ================================================ */
+.bottom-nav {
+    display: none;
+}
+
+/* ================================================
+   💻 TABLET (768px - 1023px)
+   ================================================ */
+@media (max-width: 1023px) {
+    .dashboard-layout {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    .nav-sidebar {
+        display: none;
+    }
+
+    .conversations-panel,
+    .settings-page,
+    .ai-chat-page {
+        width: 100%;
+        height: calc(100vh - 65px);
+        overflow-y: auto;
+    }
+    
+    .chat-window {
+        width: 100%;
+        height: calc(100vh - 65px);
+        overflow: hidden;
+    }
+
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: var(--bg-primary);
+        border-top: 1px solid var(--border-primary);
+        padding: 10px 0;
+        height: 65px;
+        z-index: 100;
+    }
+
+    .bottom-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        padding: 8px 16px;
+        background: none;
+        border: none;
+        color: var(--text-tertiary);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-radius: 12px;
+        min-width: 70px;
+    }
+
+    .bottom-nav-item svg,
+    .bottom-nav-item img {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+    }
+
+    .bottom-nav-item span {
+        font-size: 11px;
+        font-weight: 500;
+    }
+
+    .bottom-nav-item:hover {
+        background-color: var(--bg-hover);
+        color: var(--text-primary);
+    }
+
+    .bottom-nav-item.active {
+        background-color: var(--bg-active);
+        color: var(--brand-primary);
+    }
+}
+
+/* ================================================
+   📱 MOBILE (< 768px) - Single Screen Mode
+   ================================================ */
+@media (max-width: 767px) {
+    .dashboard-layout {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .nav-sidebar {
+        display: none;
+    }
+
+    /* ✅ للصفحات العادية (مع bottom nav) */
+    .conversations-panel,
+    .settings-page,
+    .ai-chat-page {
+        width: 100%;
+        height: calc(100vh - 65px);
+        overflow-y: auto;
+    }
+
+    /* ✅ للشات (بدون bottom nav - full height) */
+    .dashboard-layout.chat-active .chat-window {
+        width: 100%;
+        height: 100vh !important;
+        overflow: hidden;
+    }
+    
+    .dashboard-layout:not(.chat-active) .chat-window {
+        width: 100%;
+        height: calc(100vh - 65px);
+        overflow: hidden;
+    }
+
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: var(--bg-primary);
+        border-top: 1px solid var(--border-primary);
+        padding: 8px 0;
+        height: 65px;
+        z-index: 100;
+    }
+    
+    /* ✅ إخفاء bottom nav لما يكون في chat مفتوح */
+    .dashboard-layout.chat-active .bottom-nav {
+        display: none;
+    }
+
+    .bottom-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        padding: 6px 12px;
+        background: none;
+        border: none;
+        color: var(--text-tertiary);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-radius: 12px;
+        min-width: 60px;
+        flex: 1;
+    }
+
+    .bottom-nav-item svg,
+    .bottom-nav-item img {
+        font-size: 22px;
+        width: 22px;
+        height: 22px;
+    }
+
+    .bottom-nav-item span {
+        font-size: 10px;
+        font-weight: 500;
+    }
+
+    .bottom-nav-item:active {
+        background-color: var(--bg-active);
+        transform: scale(0.95);
+    }
+
+    .bottom-nav-item.active {
+        color: var(--brand-primary);
+    }
+}
+
+/* ================================================
+   📱 VERY SMALL SCREENS (< 480px)
+   ================================================ */
+@media (max-width: 480px) {
+    .conversations-panel,
+    .settings-page,
+    .ai-chat-page {
+        height: calc(100vh - 60px);
+    }
+
+    .dashboard-layout.chat-active .chat-window {
+        height: 100vh !important;
+    }
+    
+    .dashboard-layout:not(.chat-active) .chat-window {
+        height: calc(100vh - 60px);
+    }
+
+    .bottom-nav {
+        height: 45px;
+        padding: 6px 0;
+    }
+
+    .bottom-nav-item {
+        min-width: 50px;
+        padding: 4px 8px;
+    }
+
+    .bottom-nav-item svg,
+    .bottom-nav-item img {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .bottom-nav-item span {
+        font-size: 9px;
+    }
+}

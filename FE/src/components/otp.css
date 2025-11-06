@@ -1,0 +1,38 @@
+.otp-input-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* المسافة بين المربعات */
+    margin-bottom: 1.5rem;
+}
+
+.otp-box {
+    width: 60px; /* عرض المربع */
+    height: 60px; /* ارتفاع المربع */
+    border-radius: 12px;
+    border: 1px solid #E0E0E0;
+    text-align: center;
+    font-size: 1.5rem; /* حجم الخط داخل المربع */
+    font-weight: bold;
+    color: #333;
+    caret-color: #007BFF; /* لون مؤشر الكتابة */
+    transition: all 0.2s ease-in-out;
+}
+
+.otp-box:focus {
+    outline: none;
+    border-color: #007BFF;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.otp-index0 {
+    background-color: #ff7043;
+    color: white;
+}
+.otp-index1{
+    background-color: #e0e0e0;
+    color: rgb(31, 31, 31);
+}
+.otp-index2{
+    background-color: #42a5f5;
+    color: white;
+}

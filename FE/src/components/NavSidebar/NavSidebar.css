@@ -1,0 +1,320 @@
+/* ================================================
+   📱 NAV SIDEBAR - LIGHT & DARK MODE
+   ================================================ */
+
+.nav-sidebar {
+    background-color: var(--bg-primary);
+    border-right: 1px solid var(--border-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; 
+    padding: 25px 0;
+    width: 80px;
+    transition: all 0.3s ease;
+}
+
+.sidebar-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.nav-header .nav-logo {
+    width: 45px;
+    height: auto;
+}
+
+/* ✅ New Chat Button */
+.new-chat-btn {
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--brand-primary);
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.new-chat-btn:hover {
+    background-color: var(--brand-hover);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+/* ✅ Nav Links */
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    padding: 0;
+    border-radius: 50%;
+    text-decoration: none;
+    color: var(--text-tertiary);
+    font-size: 16px;
+    transition: all 0.2s ease;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.nav-item svg {
+    font-size: 20px;
+}
+
+.nav-icon-image {
+    width: 55px; 
+    height: 24px;
+    object-fit: cover;
+}
+
+.nav-item:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.nav-item.active {
+    background-color: var(--bg-active);
+    color: var(--brand-primary);
+}
+
+/* ✅ Divider */
+.nav-divider {
+    border-bottom: 1px solid var(--border-primary);
+    width: 100%;
+    margin: 10px 0;
+}
+
+/* ✅ Footer */
+.nav-footer {
+    border-top: 1px solid var(--border-primary);
+    padding-top: 20px;
+    width: 100%;
+}
+
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid var(--border-primary);
+    transition: border-color 0.2s ease;
+}
+
+.profile-avatar:hover {
+    border-color: var(--brand-primary);
+}
+
+.logout-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--text-tertiary);
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.logout-icon:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+/* ================================================
+   🔔 MODAL STYLES
+   ================================================ */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background: var(--bg-primary);
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.3s ease;
+    border: 1px solid var(--border-primary);
+}
+
+@keyframes slideUp {
+    from { transform: translateY(40px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Modal Header */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    color: var(--text-tertiary);
+    font-size: 26px;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+/* Modal Body */
+.modal-body {
+    padding: 20px;
+}
+
+.modal-input {
+    width: 90%;
+    padding: 12px 15px;
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 15px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.modal-input:focus {
+    border-color: var(--brand-primary);
+    background-color: var(--bg-primary);
+    box-shadow: 0 0 0 3px rgba(241, 104, 19, 0.1);
+}
+
+.modal-input::placeholder {
+    color: var(--text-tertiary);
+}
+
+/* Modal Footer */
+.modal-footer {
+    display: flex;
+    gap: 10px;
+    padding: 18px 20px;
+    border-top: 1px solid var(--border-primary);
+}
+
+.modal-btn {
+    flex: 1;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modal-btn.cancel {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.modal-btn.cancel:hover {
+    background-color: var(--bg-hover);
+}
+
+.modal-btn.add {
+    background-color: var(--brand-primary);
+    color: white;
+}
+
+.modal-btn.add:hover {
+    background-color: var(--brand-hover);
+    box-shadow: var(--shadow-md);
+}
+
+.modal-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Messages */
+.modal-message {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.modal-message.error {
+    color: var(--error-dark);
+    background-color: var(--error-bg);
+}
+
+.modal-message.success {
+    color: var(--success-dark);
+    background-color: var(--success-bg);
+}
