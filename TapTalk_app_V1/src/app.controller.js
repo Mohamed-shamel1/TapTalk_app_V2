@@ -23,7 +23,8 @@ const bootstrap = async () => {
     app.use(express.json());
 
     const vercelUrl="https://tap-talk-app-v2.vercel.app";
-    const allowOrigans = ['http://localhost:5173' , vercelUrl];
+    const vercelPreviewUrl = "https://tap-talk-app-v2-git-main-mohamed-shamel1s-projects.vercel.app";
+    const allowOrigans = ['http://localhost:5173' , vercelUrl ,vercelPreviewUrl ];
 
     app.use(cors({
         origin: allowOrigans,
