@@ -19,27 +19,17 @@ import { error } from "console";
 
 const bootstrap = async () => {
     const app = express();
-    const port = process.env.PORT;
+    const port = process.env.PORT || 3000;
     app.use(express.json());
 
     const vercelUrl="https://tap-talk-app-v2.vercel.app";
     const vercelPreviewUrl = "https://tap-talk-app-v2-git-main-mohamed-shamel1s-projects.vercel.app";
-// ✅ استخدم الكود ده
-const allowOrigans = ['http://localhost:5173', vercelUrl, vercelPreviewUrl];
+    const allowOrigans = ['http://localhost:5173' , vercelUrl ,vercelPreviewUrl ];
 
-app.use(cors({
-    origin: function (origin, callback) {
-        // السماح بالطلبات لو جاية من دومين في اللستة
-        // أو لو الطلب مش جاي من متصفح أصلاً (زي Postman)
-        if (!origin || allowOrigans.indexOf(origin) !== -1) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // شيلنا OPTIONS من هنا لأنها بتتعالج تلقائي
-    credentials: true
-}));
+    app.use(cors({
+        origin: '*',
+        credentials: true
+    }));
     // app.use(helmet());
 
     const limiter = rateLimit({
@@ -70,7 +60,7 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
     app.use("/api/message", massageController);
     app.use("/api/ai", aiController);
 
-    app.all('*', (req, res) => {
+    app.all('{/*dummy}', (req, res) => {
         res.status(404).json({ message: "Not Found" });
     });
 
