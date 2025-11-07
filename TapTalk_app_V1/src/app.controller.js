@@ -22,7 +22,7 @@ const bootstrap = async () => {
     const port = process.env.PORT || 3000;
     app.use(express.json());
 
-    const vercelUrl="https://tap-talk-app-v2.vercel.app/";
+    const vercelUrl="https://tap-talk-app-v2.vercel.app";
     const allowOrigans = ['http://localhost:5173' , vercelUrl];
 
     app.use(cors({
