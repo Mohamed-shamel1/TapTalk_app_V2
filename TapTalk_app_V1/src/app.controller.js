@@ -28,8 +28,10 @@ const bootstrap = async () => {
 
     app.use(cors({
         origin: '*',
+         methods: ['GET','POST','PUT','DELETE','OPTIONS'],
         credentials: true
     }));
+    app.options('*', cors());
     // app.use(helmet());
 
     const limiter = rateLimit({
@@ -70,11 +72,9 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
     const io = new Server(httpServer, {
         cors: {
             origin: '*',
-             methods: ['GET','POST','PUT','DELETE','OPTIONS'],
             credentials: true
         }
     });
-    app.options('*', cors());
 
     io.on('connection', (socket) => {
         console.log('A user connected:', socket.id);
