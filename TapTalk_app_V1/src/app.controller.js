@@ -22,8 +22,11 @@ const bootstrap = async () => {
     const port = process.env.PORT || 3000;
     app.use(express.json());
 
+    const vercelUrl="https://tap-talk-app-v2.vercel.app/";
+    const allowOrigans = ['http://localhost:5173' , vercelUrl];
+
     app.use(cors({
-        origin: 'http://localhost:5173',
+        origin: allowOrigans,
         credentials: true
     }));
     app.use(helmet());
@@ -65,7 +68,7 @@ app.use("/api/auth", limiter);
     const httpServer = createServer(app);
     const io = new Server(httpServer, {
         cors: {
-            origin: 'http://localhost:5173',
+            origin: allowOrigans,
             credentials: true
         }
     });
