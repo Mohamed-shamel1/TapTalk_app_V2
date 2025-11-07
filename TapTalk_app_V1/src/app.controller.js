@@ -27,7 +27,7 @@ const bootstrap = async () => {
     const allowOrigans = ['http://localhost:5173' , vercelUrl ,vercelPreviewUrl ];
 
     app.use(cors({
-        origin: allowOrigans,
+        origin: '*',
         credentials: true
     }));
     app.use(helmet());
@@ -69,7 +69,7 @@ app.use("/api/auth", limiter);
     const httpServer = createServer(app);
     const io = new Server(httpServer, {
         cors: {
-            origin: allowOrigans,
+            origin: '*',
             credentials: true
         }
     });
