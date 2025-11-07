@@ -6,11 +6,8 @@ import userController from "./modules/user/user.controller.js";
 import massageController from "./modules/massage/massage.controller.js";
 import aiController from "./modules/ai/ai.controller.js";
 import connectDB from './DB/connection.js';
-import { globalErrorHandler } from './utils/response.js';
-import * as dotenv from 'dotenv';
-import path, { resolve } from 'path';
+import { globalErrorHandler } from './utils/response.js';import path, { resolve } from 'path';
 import { rateLimit } from 'express-rate-limit';
-dotenv.config({});
 import cors from 'cors';
 import helmet from "helmet";
 import { specs, swaggerUi } from './utils/swagger.js';
@@ -170,7 +167,7 @@ app.use("/api/auth", limiter);
         });
     });
 
-    httpServer.listen(port, () => {
+    httpServer.listen(port,'0.0.0.0' , () => {
         console.log(`Server is running on http://localhost:${port}`);
     });
 
