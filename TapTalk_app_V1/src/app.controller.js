@@ -24,14 +24,22 @@ const bootstrap = async () => {
 
     const vercelUrl="https://tap-talk-app-v2.vercel.app";
     const vercelPreviewUrl = "https://tap-talk-app-v2-git-main-mohamed-shamel1s-projects.vercel.app";
-    const allowOrigans = ['http://localhost:5173' , vercelUrl ,vercelPreviewUrl ];
+// ✅ استخدم الكود ده
+const allowOrigans = ['http://localhost:5173', vercelUrl, vercelPreviewUrl];
 
-    app.use(cors({
-        origin: '*',
-         methods: ['GET','POST','PUT','DELETE','OPTIONS'],
-        credentials: true
-    }));
-    app.options('*', cors());
+app.use(cors({
+    origin: function (origin, callback) {
+        // السماح بالطلبات لو جاية من دومين في اللستة
+        // أو لو الطلب مش جاي من متصفح أصلاً (زي Postman)
+        if (!origin || allowOrigans.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // شيلنا OPTIONS من هنا لأنها بتتعالج تلقائي
+    credentials: true
+}));
     // app.use(helmet());
 
     const limiter = rateLimit({
