@@ -60,7 +60,7 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
     app.use("/api/message", massageController);
     app.use("/api/ai", aiController);
 
-    app.all('{/*dummy}', (req, res) => {
+    app.all('*', (req, res) => {
         res.status(404).json({ message: "Not Found" });
     });
 
@@ -70,9 +70,11 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
     const io = new Server(httpServer, {
         cors: {
             origin: '*',
+             methods: ['GET','POST','PUT','DELETE','OPTIONS'],
             credentials: true
         }
     });
+    app.options('*', cors());
 
     io.on('connection', (socket) => {
         console.log('A user connected:', socket.id);
