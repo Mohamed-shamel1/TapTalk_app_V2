@@ -30,7 +30,7 @@ const bootstrap = async () => {
         origin: '*',
         credentials: true
     }));
-    app.use(helmet());
+    // app.use(helmet());
 
     const limiter = rateLimit({
         windowMs: 60 * 60 * 1000,
