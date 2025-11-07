@@ -27,9 +27,17 @@ const bootstrap = async () => {
     const allowOrigans = ['http://localhost:5173' , vercelUrl ,vercelPreviewUrl ];
 
     app.use(cors({
-        origin: '*',
-        credentials: true
-    }));
+    origin: function (origin, callback) {
+        // السماح بالطلبات لو جاية من دومين في اللستة
+        // أو لو الطلب مش جاي من متصفح أصلاً (زي Postman)
+        if (!origin || allowOrigans.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
+}));
     // app.use(helmet());
 
     const limiter = rateLimit({
@@ -60,7 +68,7 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
     app.use("/api/message", massageController);
     app.use("/api/ai", aiController);
 
-    app.all('{/*dummy}', (req, res) => {
+    app.all('*', (req, res) => {
         res.status(404).json({ message: "Not Found" });
     });
 
@@ -69,7 +77,7 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
     const httpServer = createServer(app);
     const io = new Server(httpServer, {
         cors: {
-            origin: '*',
+            origin: allowOrigans,
             credentials: true
         }
     });
