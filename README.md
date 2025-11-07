@@ -1,9 +1,10 @@
 <div align="">
-  <img src="./FE/src/assets/Logo.png" alt="TapTalk Logo" width="400" height="400"/>
-  
+  <img src="./FE/src/assets/Logo.png" width="400" height="400" />
+
   # **TapTalk**
-  
-  ### **Connect. Chat. Communicate. Real-Time.** 💬✨
+  ### Connect. Chat. Communicate. Real-Time. 💬✨
+
+  **Live Demo:** https://tap-talk-app-v2.vercel.app/
 </div>
 
 ---
