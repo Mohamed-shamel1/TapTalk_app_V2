@@ -8,7 +8,6 @@ import * as DBservice from "../../DB/DB.service.js";
 import * as security from "../../utils/security/hash.security.js"; // Importing the hash functions
 import * as encryption from "../../utils/security/encryption.js"; // Importing the encryption functions
 import * as jsonwebtoken from "../../utils/security/jwt.security.js";
-import * as dotenv from "dotenv";
 import { sendEmail } from "../../utils/email.js"; // Importing the email utility
 import { OAuth2Client } from "google-auth-library";
 import eventEmitter from "../../utils/events/events.email.js";
@@ -28,7 +27,6 @@ import {
 import { nanoid } from "nanoid";
 import tokenModel from "../../model/Token.model.js";
 import { log } from "console";
-dotenv.config(); // Load environment variables from .env file
 
 
 

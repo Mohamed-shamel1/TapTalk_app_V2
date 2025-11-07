@@ -1,7 +1,5 @@
 import cloudinary from 'cloudinary';
 import path from "path";
-import dotenv from "dotenv";
-dotenv.config(path.join("./.env")); // Load environment variables from .env file
 
 export const cloud = () => {
   cloudinary.v2.config({
