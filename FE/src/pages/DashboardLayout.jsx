@@ -13,8 +13,9 @@ import LoadingIndicator from '../components/LoadingIndicator.jsx';
 import { useTheme } from '../context/ThemeContext.jsx';
 import { FaCommentDots, FaAddressBook, FaCog } from 'react-icons/fa';
 import robotIcon from '../assets/icons8-happy-robot-assistant-3d-stickle-96.png';
+import { SOCKET_URL } from '../../config.js';
 
-const SOCKET_SERVER_URL = 'http://localhost:3000';
+const SOCKET_SERVER_URL = SOCKET_URL;
 
 const DashboardLayout = () => {
     const { isDarkMode } = useTheme();
