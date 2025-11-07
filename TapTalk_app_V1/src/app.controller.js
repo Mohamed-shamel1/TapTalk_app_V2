@@ -68,7 +68,7 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
     app.use("/api/message", massageController);
     app.use("/api/ai", aiController);
 
-    app.all('*', (req, res) => {
+    app.all('{/*dummy}', (req, res) => {
         res.status(404).json({ message: "Not Found" });
     });
 
