@@ -1,8 +1,5 @@
 import CryptoJS from "crypto-js";
 import User from "../../model/user.model.js";
-import * as dotenv from 'dotenv';
-dotenv.config(); // Load environment variables from .env file
-
 export const encryptData = async ({data , key= process.env.ENCRYPTION_KEY}={}) => {
   return CryptoJS.AES.encrypt(JSON.stringify(data), key).toString();
 };

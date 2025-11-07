@@ -1,12 +1,10 @@
 import jwt from "jsonwebtoken";
-import * as dotenv from 'dotenv';
 import { nanoid } from "nanoid";
 import * as DBservice from "../../DB/DB.service.js";
 import tokenModel from "../../model/Token.model.js";
 import User from "../../model/user.model.js";
 export const signatureLevelEnum = {system:"System" , Bearer:"Bearer"}
 export const logoutEnum = {logoutFromAllDevices:"logoutFromAllDevices" , logout:"logout" , staylogedIn:"staylogedIn"}
-dotenv.config();
 //داله ل انشاء ال access token وال refresh token
 // =============================
 // إنشاء Access + Refresh Tokens
