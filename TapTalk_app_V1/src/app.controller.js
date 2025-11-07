@@ -171,7 +171,7 @@ app.use("/api/auth", limiter);
     });
 
     httpServer.listen(port,'0.0.0.0' , () => {
-        console.log(`Server is running on http://localhost:${port}`);
+        console.log(`Server is running on ${port}`);
     });
 
     httpServer.on('error', (error) => {
