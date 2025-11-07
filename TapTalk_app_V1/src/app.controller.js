@@ -42,7 +42,7 @@ const bootstrap = async () => {
     // --- تهيئة موديل Gemini ---
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-app.use("/api/auth", limiter);
+// app.use("/api/auth", limiter);
     await connectDB();
 
     app.get('/', (req, res) => {
