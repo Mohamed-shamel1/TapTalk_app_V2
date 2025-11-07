@@ -19,7 +19,7 @@ import { error } from "console";
 
 const bootstrap = async () => {
     const app = express();
-    const port = process.env.PORT || 3000;
+    const port = process.env.PORT;
     app.use(express.json());
 
     const vercelUrl="https://tap-talk-app-v2.vercel.app";
@@ -62,7 +62,7 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
     app.use("/api/message", massageController);
     app.use("/api/ai", aiController);
 
-    app.all('{/*dummy}', (req, res) => {
+    app.all('*', (req, res) => {
         res.status(404).json({ message: "Not Found" });
     });
 
