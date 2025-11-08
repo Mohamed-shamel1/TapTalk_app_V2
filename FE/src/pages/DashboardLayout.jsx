@@ -11,7 +11,7 @@ import userService from '../services/userService.js';
 import messageService from '../services/messageService.js';
 import LoadingIndicator from '../components/LoadingIndicator.jsx';
 import { useTheme } from '../context/ThemeContext.jsx';
-import { FaCommentDots, FaAddressBook, FaCog } from 'react-icons/fa';
+import { FaCommentDots, FaAddressBook, FaCog, FaPlus } from 'react-icons/fa';
 import robotIcon from '../assets/icons8-happy-robot-assistant-3d-stickle-96.png';
 import { SOCKET_URL } from '../../config.js';
 
@@ -32,6 +32,11 @@ const DashboardLayout = () => {
     const [messages, setMessages] = useState([]);
     
     const [showContactsModal, setShowContactsModal] = useState(false);
+    const [showAddContactModal, setShowAddContactModal] = useState(false);
+    const [contactEmail, setContactEmail] = useState('');
+    const [modalLoading, setModalLoading] = useState(false);
+    const [modalError, setModalError] = useState('');
+    const [modalSuccess, setModalSuccess] = useState('');
     
     const socketRef = useRef(null);
 
@@ -194,6 +199,8 @@ const DashboardLayout = () => {
     const handleChangeView = (view) => {
         if (view === 'contacts') {
             setShowContactsModal(true);
+        } else if (view === 'add-contact') {
+            setShowAddContactModal(true);
         } else {
             setActiveView(view);
             setSelectedConversationId(null);
@@ -205,6 +212,42 @@ const DashboardLayout = () => {
         if (userId) {
             handleSelectConversation(userId);
             setActiveView('chats');
+        }
+    };
+
+    const closeAddContactModal = () => {
+        setShowAddContactModal(false);
+        setContactEmail('');
+        setModalLoading(false);
+        setModalError('');
+        setModalSuccess('');
+    };
+
+    const handleAddContact = async () => {
+        if (!contactEmail.trim()) {
+            setModalError('Please enter an email address');
+            return;
+        }
+        
+        setModalLoading(true);
+        setModalError('');
+        setModalSuccess('');
+        
+        try {
+            const response = await userService.addFriend(contactEmail);
+            
+            setModalSuccess(response.message || 'Friend added successfully!');
+            setContactEmail('');
+            
+            setTimeout(() => {
+                closeAddContactModal();
+            }, 2000);
+
+        } catch (error) {
+            console.error('Failed to add contact:', error);
+            setModalError(error.response?.data?.message || 'Failed to add contact. Please try again.');
+        } finally {
+            setModalLoading(false);
         }
     };
 
@@ -287,6 +330,56 @@ const DashboardLayout = () => {
                     />
                 )}
 
+                {showAddContactModal && (
+                    <div className="modal-overlay" onClick={closeAddContactModal}>
+                        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                            <div className="modal-header">
+                                <h3>Add New Contact</h3>
+                                <button 
+                                    className="modal-close-btn"
+                                    onClick={closeAddContactModal}
+                                >
+                                    ×
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                {modalError && <p className="modal-message error">{modalError}</p>}
+                                {modalSuccess && <p className="modal-message success">{modalSuccess}</p>}
+
+                                <input
+                                    type="email"
+                                    className="modal-input"
+                                    placeholder="Enter contact's email"
+                                    value={contactEmail}
+                                    onChange={(e) => setContactEmail(e.target.value)}
+                                    disabled={modalLoading}
+                                    onKeyPress={(e) => {
+                                        if (e.key === 'Enter' && !modalLoading) {
+                                            handleAddContact();
+                                        }
+                                    }}
+                                />
+                            </div>
+                            <div className="modal-footer">
+                                <button 
+                                    className="modal-btn cancel"
+                                    onClick={closeAddContactModal}
+                                    disabled={modalLoading}
+                                >
+                                    Cancel
+                                </button>
+                                <button 
+                                    className="modal-btn add"
+                                    onClick={handleAddContact}
+                                    disabled={modalLoading}
+                                >
+                                    {modalLoading ? 'Adding...' : 'Add Contact'}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
                 <div className="bottom-nav">
                     <button 
                         className={`bottom-nav-item ${activeView === 'chats' ? 'active' : ''}`}
@@ -302,6 +395,14 @@ const DashboardLayout = () => {
                     >
                         <FaAddressBook />
                         <span>Contacts</span>
+                    </button>
+
+                    <button 
+                        className="bottom-nav-item"
+                        onClick={() => handleChangeView('add-contact')}
+                    >
+                        <FaPlus />
+                        <span>Add</span>
                     </button>
 
                     <button 
@@ -369,7 +470,56 @@ const DashboardLayout = () => {
                     />
                 )}
 
-                {/* ✅ إخفاء Bottom Nav لما يكون في chat مفتوح */}
+                {showAddContactModal && (
+                    <div className="modal-overlay" onClick={closeAddContactModal}>
+                        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                            <div className="modal-header">
+                                <h3>Add New Contact</h3>
+                                <button 
+                                    className="modal-close-btn"
+                                    onClick={closeAddContactModal}
+                                >
+                                    ×
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                {modalError && <p className="modal-message error">{modalError}</p>}
+                                {modalSuccess && <p className="modal-message success">{modalSuccess}</p>}
+
+                                <input
+                                    type="email"
+                                    className="modal-input"
+                                    placeholder="Enter contact's email"
+                                    value={contactEmail}
+                                    onChange={(e) => setContactEmail(e.target.value)}
+                                    disabled={modalLoading}
+                                    onKeyPress={(e) => {
+                                        if (e.key === 'Enter' && !modalLoading) {
+                                            handleAddContact();
+                                        }
+                                    }}
+                                />
+                            </div>
+                            <div className="modal-footer">
+                                <button 
+                                    className="modal-btn cancel"
+                                    onClick={closeAddContactModal}
+                                    disabled={modalLoading}
+                                >
+                                    Cancel
+                                </button>
+                                <button 
+                                    className="modal-btn add"
+                                    onClick={handleAddContact}
+                                    disabled={modalLoading}
+                                >
+                                    {modalLoading ? 'Adding...' : 'Add Contact'}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
                 {!isChatActive && (
                     <div className="bottom-nav">
                         <button 
@@ -386,6 +536,14 @@ const DashboardLayout = () => {
                         >
                             <FaAddressBook />
                             <span>Contacts</span>
+                        </button>
+
+                        <button 
+                            className="bottom-nav-item"
+                            onClick={() => handleChangeView('add-contact')}
+                        >
+                            <FaPlus />
+                            <span>Add</span>
                         </button>
 
                         <button 

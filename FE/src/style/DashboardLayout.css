@@ -50,16 +50,20 @@
    ================================================ */
 @media (max-width: 1023px) {
     .dashboard-layout {
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
+        /* ✅ Keep grid layout for tablet - just hide sidebar */
+        grid-template-columns: 400px 1fr;
+        grid-template-areas: "conversations content";
     }
 
     .nav-sidebar {
         display: none;
     }
 
-    .conversations-panel,
+    .conversations-panel {
+        height: calc(100vh - 65px);
+        overflow-y: auto;
+    }
+
     .settings-page,
     .ai-chat-page {
         width: 100%;
@@ -242,7 +246,7 @@
     }
 
     .bottom-nav {
-        height: 45px;
+        height: 60px;
         padding: 6px 0;
     }
 
